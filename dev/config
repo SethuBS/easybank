@@ -5,8 +5,8 @@ server.port=8080
 # AWS SNS configuration
 aws.region=us-east-1
 aws.sns.topic.arn=arn:aws:sns:us-east-1:892336527368:MyTopic
-aws.accessKeyId={aws-accessKeyId}
-aws.secretKey={aws-secretKey}
+aws.accessKeyId=AKIA47Q3G3AEARZXR6VQ
+aws.secretKey=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
 
 # H2 Database configuration for development/testing
 spring.h2.console.enabled=true
