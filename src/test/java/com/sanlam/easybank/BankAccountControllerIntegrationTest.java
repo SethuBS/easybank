@@ -53,7 +53,7 @@ public class BankAccountControllerIntegrationTest {
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(request)))
                 .andExpect(status().isOk())
-                .andExpect(content().string("Withdrawal successful"));
+                .andExpect(content().string("Withdrawal successful. Current balance: 1000.00"));
     }
 
     @Test
