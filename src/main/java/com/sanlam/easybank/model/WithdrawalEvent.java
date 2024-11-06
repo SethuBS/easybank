@@ -1,15 +1,13 @@
 package com.sanlam.easybank.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 @AllArgsConstructor
 @NoArgsConstructor
+@ToString
 @Getter
 @Setter
 public class WithdrawalEvent {
@@ -17,7 +15,7 @@ public class WithdrawalEvent {
     private BigDecimal amount;
     private Long accountId;
     private String status;
-    private LocalDateTime timestamp;
+    private LocalDateTime timestamp = LocalDateTime.now();
 
     public WithdrawalEvent(BigDecimal amount, Long accountId, String status) {
         this.amount = amount;
