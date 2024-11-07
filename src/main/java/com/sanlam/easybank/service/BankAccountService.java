@@ -6,5 +6,6 @@ import java.math.BigDecimal;
 
 public interface BankAccountService {
     void withdraw(Long accountId, BigDecimal amount) throws InsufficientFundsException;
+
     BigDecimal getBalance(Long accountId);
 }
