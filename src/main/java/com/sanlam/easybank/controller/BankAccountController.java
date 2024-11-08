@@ -33,22 +33,23 @@ public class BankAccountController {
     public ResponseEntity<String> withdraw(@RequestBody WithdrawRequest withdrawRequest) {
         Long accountId = withdrawRequest.getAccountId();
         BigDecimal amount = withdrawRequest.getAmount();
+        BigDecimal currentBalance;
 
         if (accountId == null || amount == null) {
             logger.warn("Withdrawal request failed: Account ID or amount is missing.");
             return ResponseEntity.badRequest().body("Account ID and amount are required.");
         }
 
-        BigDecimal currentBalance = bankAccountService.getBalance(accountId); // Get current balance
-
         logger.info("Received withdrawal request for account {} with amount {}", accountId, amount);
 
         try {
             bankAccountService.withdraw(accountId, amount);
+            currentBalance = bankAccountService.getBalance(accountId);
             logger.info("Withdrawal successful for account {}", accountId);
             String responseMessage = String.format("Withdrawal successful. Current balance: %s", currentBalance);
             return ResponseEntity.ok(responseMessage);
         } catch (InsufficientFundsException e) {
+            currentBalance = bankAccountService.getBalance(accountId);
             logger.warn("Insufficient funds for account {}. Current balance: {}. Error: {}", accountId, currentBalance, e.getMessage());
             String response = String.format("Insufficient funds. Current balance: %s", currentBalance);
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
