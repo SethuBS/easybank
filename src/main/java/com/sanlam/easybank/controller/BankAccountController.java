@@ -34,14 +34,14 @@ public class BankAccountController {
         Long accountId = withdrawRequest.getAccountId();
         BigDecimal amount = withdrawRequest.getAmount();
 
-        BigDecimal currentBalance = bankAccountService.getBalance(accountId); // Get current balance
-
-        logger.info("Received withdrawal request for account {} with amount {}", accountId, amount);
-
         if (accountId == null || amount == null) {
             logger.warn("Withdrawal request failed: Account ID or amount is missing.");
             return ResponseEntity.badRequest().body("Account ID and amount are required.");
         }
+
+        BigDecimal currentBalance = bankAccountService.getBalance(accountId); // Get current balance
+
+        logger.info("Received withdrawal request for account {} with amount {}", accountId, amount);
 
         try {
             bankAccountService.withdraw(accountId, amount);
