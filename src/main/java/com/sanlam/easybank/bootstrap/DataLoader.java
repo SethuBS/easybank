@@ -2,6 +2,7 @@ package com.sanlam.easybank.bootstrap;
 
 import com.sanlam.easybank.model.BankAccount;
 import com.sanlam.easybank.repository.BankAccountRepository;
+import com.sanlam.easybank.repository.impl.BankAccountRepositoryImpl;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
@@ -13,7 +14,7 @@ public class DataLoader {
 
     private final BankAccountRepository bankAccountRepository;
 
-    public DataLoader(BankAccountRepository bankAccountRepository) {
+    public DataLoader(BankAccountRepositoryImpl bankAccountRepository) {
         this.bankAccountRepository = bankAccountRepository;
     }
 

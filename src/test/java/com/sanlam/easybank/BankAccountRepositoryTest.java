@@ -1,10 +1,10 @@
 package com.sanlam.easybank;
 
 import com.sanlam.easybank.repository.BankAccountRepository;
+import com.sanlam.easybank.repository.impl.BankAccountRepositoryImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -22,14 +22,15 @@ public class BankAccountRepositoryTest {
     @Mock
     private JdbcTemplate jdbcTemplate;
 
-    @InjectMocks
     private BankAccountRepository bankAccountRepository;
 
     private Long accountId;
+
     private BigDecimal initialBalance;
 
     @BeforeEach
     void setUp() {
+        bankAccountRepository = new BankAccountRepositoryImpl(jdbcTemplate); // Instantiate the actual implementation
         accountId = 1L;
         initialBalance = BigDecimal.valueOf(1000.00);
     }
@@ -61,5 +62,4 @@ public class BankAccountRepositoryTest {
         assertEquals(1, rowsAffected);
         verify(jdbcTemplate, times(1)).update(any(String.class), eq(amountToDeduct), eq(accountId));
     }
-
 }
